@@ -1,22 +1,21 @@
 package com.umeng.jiaqizuoye1_26.presenter.fristpagepresenter;
 
-import com.umeng.jiaqizuoye1_26.base.BaseFragment;
-import com.umeng.jiaqizuoye1_26.base.BasePersenter;
+import com.umeng.jiaqizuoye1_26.base.BasePresenter;
 import com.umeng.jiaqizuoye1_26.bean.PageBean;
-import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FristPage;
+import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FirstPage;
 import com.umeng.jiaqizuoye1_26.model.CommonSubscriber;
 import com.umeng.jiaqizuoye1_26.model.http.HttpManager;
 import com.umeng.jiaqizuoye1_26.utils.RxUtils;
 
-public class PagePresenter  extends BasePersenter<FristPage.View> implements FristPage.Presenter {
+public class PagePresenter  extends BasePresenter<FirstPage.View> implements FirstPage.Presenter {
     @Override
-    public void getFristPage() {
+    public void getFirstPage() {
         addSubscribe(HttpManager.getMyApi().getPageBean()
                 .compose(RxUtils.<PageBean> rxScheduler())
                 .subscribeWith(new CommonSubscriber<PageBean>(mView){
                     @Override
                     public void onNext(PageBean pageBean) {
-                        mView.returnFristPage(pageBean );
+                        mView.returnFirstPage(pageBean );
                     }
                 }));
     }

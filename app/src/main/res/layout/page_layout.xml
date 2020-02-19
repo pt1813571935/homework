@@ -16,45 +16,45 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/banner"
-        android:id="@+id/tab_frist"/>
+        android:id="@+id/tab_first"/>
     <TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tab_frist"
-    android:id="@+id/tv_pinpai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tab_first"
+        android:id="@+id/tv_brand"
         android:gravity="center"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rec_pinpai"
-        app:layout_constraintTop_toBottomOf="@id/tv_pinpai"/>
+        android:id="@+id/rec_brand"
+        app:layout_constraintTop_toBottomOf="@id/tv_brand"/>
     <TextView
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_yisi"
-        app:layout_constraintTop_toBottomOf="@id/rec_pinpai"/>
+        android:id="@+id/tv_new"
+        app:layout_constraintTop_toBottomOf="@id/rec_brand"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rec_yisi"
-        app:layout_constraintTop_toBottomOf="@id/tv_yisi"/>
+        android:id="@+id/rec_new"
+        app:layout_constraintTop_toBottomOf="@id/tv_new"/>
 
     <TextView
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_renqi"
-        app:layout_constraintTop_toBottomOf="@id/rec_yisi"/>
+        android:id="@+id/tv_moods"
+        app:layout_constraintTop_toBottomOf="@id/rec_new"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rec_renqi"
-        app:layout_constraintTop_toBottomOf="@id/tv_renqi"/>
+        android:id="@+id/rec_moods"
+        app:layout_constraintTop_toBottomOf="@id/tv_moods"/>
 
 <TextView
     android:gravity="center"
-    app:layout_constraintTop_toBottomOf="@id/rec_renqi"
+    app:layout_constraintTop_toBottomOf="@id/rec_moods"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/tv_topic"/>

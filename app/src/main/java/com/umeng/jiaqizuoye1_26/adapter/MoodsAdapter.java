@@ -15,11 +15,11 @@ import com.umeng.jiaqizuoye1_26.bean.PageBean;
 
 import java.util.ArrayList;
 
-public class RenQiAdapter extends RecyclerView.Adapter {
+public class MoodsAdapter extends RecyclerView.Adapter {
     private Context baseContext;
     private ArrayList<PageBean.DataBean.HotGoodsListBean> list2;
 
-    public RenQiAdapter(Context baseContext, ArrayList<PageBean.DataBean.HotGoodsListBean> list2) {
+    public MoodsAdapter(Context baseContext, ArrayList<PageBean.DataBean.HotGoodsListBean> list2) {
         this.baseContext = baseContext;
         this.list2 = list2;
     }
@@ -27,7 +27,7 @@ public class RenQiAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(baseContext, R.layout.renqi_layout, null);
+        View view = View.inflate(baseContext, R.layout.moods_layout, null);
         return new ViewHolder(view);
     }
 

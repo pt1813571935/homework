@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void initFragment() {
         fm = new ArrayList<>();
-        fm.add(new FristPageFragment());
+        fm.add(new FirstPageFragment());
         fm.add(new TopicFragment());
         fm.add(new ClassifyFragment());
         fm.add(new ShopFragment());

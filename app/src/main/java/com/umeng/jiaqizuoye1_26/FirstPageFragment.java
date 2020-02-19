@@ -1,16 +1,10 @@
 package com.umeng.jiaqizuoye1_26;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,48 +14,46 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.umeng.jiaqizuoye1_26.adapter.HomeAdapter;
 import com.umeng.jiaqizuoye1_26.adapter.Page_TopicAdapter;
-import com.umeng.jiaqizuoye1_26.adapter.RenQiAdapter;
-import com.umeng.jiaqizuoye1_26.adapter.TopicAdapter;
-import com.umeng.jiaqizuoye1_26.adapter.YiSiAdapter;
-import com.umeng.jiaqizuoye1_26.adapter.ZhiGongAdapter;
+import com.umeng.jiaqizuoye1_26.adapter.MoodsAdapter;
+import com.umeng.jiaqizuoye1_26.adapter.NewAdapter;
+import com.umeng.jiaqizuoye1_26.adapter.BrandAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseFragment;
 import com.umeng.jiaqizuoye1_26.bean.PageBean;
-import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FristPage;
-import com.umeng.jiaqizuoye1_26.presenter.MainPresenter;
+import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FirstPage;
 import com.umeng.jiaqizuoye1_26.presenter.fristpagepresenter.PagePresenter;
-import com.umeng.jiaqizuoye1_26.view.MainView;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FristPageFragment extends BaseFragment<FristPage.View, FristPage.Presenter> implements FristPage.View {
+public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Presenter> implements FirstPage.View {
 
 
     private ArrayList<PageBean.DataBean.BannerBean> beans;
-    private RecyclerView rec_p;
-    private RecyclerView rec_yi;
-    private Banner bann;
-    private TabLayout tab_frist;
-    private TextView tv_p;
-    private TextView tv_y;
-    private ZhiGongAdapter adapter;
+    private RecyclerView  rec_brand ;
+    private RecyclerView rec_new;
+
+    private TabLayout tab_first;
+    private BrandAdapter adapter;
     private ArrayList<PageBean.DataBean.BrandListBean> list;
     private ArrayList<PageBean.DataBean.NewGoodsListBean> list1;
-    private YiSiAdapter adapter1;
-    private RecyclerView rec_ren;
+    private NewAdapter adapter1;
+    private RecyclerView rec_moods;
     private RecyclerView rec_topic;
     private RecyclerView rec_home;
-    private TextView tv_r;
+    private TextView tv_brand;
+    private TextView tv_new;
+    private TextView tv_moods;
     private TextView tv_topic;
     private TextView tv_home;
     private ArrayList<PageBean.DataBean.HotGoodsListBean> list2;
-    private RenQiAdapter adapter2;
+    private MoodsAdapter adapter2;
     private ArrayList<PageBean.DataBean.TopicListBean> list3;
     private Page_TopicAdapter adapter3;
     private ArrayList<PageBean.DataBean.CategoryListBean.GoodsListBean> list4;
     private HomeAdapter adapter4;
+    private Banner banner;
 
 
     @Override
@@ -71,34 +63,34 @@ public class FristPageFragment extends BaseFragment<FristPage.View, FristPage.Pr
 
     @Override
     protected void initView(View view) {
-        rec_p = view.findViewById(R.id.rec_pinpai);
-        rec_yi = view.findViewById(R.id.rec_yisi);
-        rec_ren = view.findViewById(R.id.rec_renqi);
+        rec_brand = view.findViewById(R.id.rec_brand);
+        rec_new = view.findViewById(R.id.rec_new);
+        rec_moods = view.findViewById(R.id.rec_moods);
         rec_topic = view.findViewById(R.id.rec_topic);
         rec_home = view.findViewById(R.id.rec_home);
-        bann = view.findViewById(R.id.banner);
-        tab_frist = view.findViewById(R.id.tab_frist);
-        tv_p = view.findViewById(R.id.tv_pinpai);
-        tv_y = view.findViewById(R.id.tv_yisi);
-        tv_r = view.findViewById(R.id.tv_renqi);
+        banner = view.findViewById(R.id.banner);
+        tab_first = view.findViewById(R.id.tab_first);
+        tv_brand = view.findViewById(R.id.tv_brand);
+        tv_new = view.findViewById(R.id.tv_new);
+        tv_moods = view.findViewById(R.id.tv_moods);
         tv_topic = view.findViewById(R.id.tv_topic);
         tv_home = view.findViewById(R.id.tv_home);
         //品牌制造商直供适配器
         list = new ArrayList<>();
-        adapter = new ZhiGongAdapter(getContext(), list);
-        rec_p.setAdapter(adapter);
-        rec_p.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        adapter = new BrandAdapter(getContext(), list);
+        rec_brand.setAdapter(adapter);
+        rec_brand.setLayoutManager(new GridLayoutManager(getContext(), 2));
         //周一周四，新品首发适配器
         list1 = new ArrayList<>();
-        adapter1 = new YiSiAdapter(getContext(), list1);
-        rec_yi.setAdapter(adapter1);
-        rec_yi.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        adapter1 = new NewAdapter(getContext(), list1);
+        rec_new.setAdapter(adapter1);
+        rec_new.setLayoutManager(new GridLayoutManager(getContext(), 2));
         //人气推荐适配器
         list2 = new ArrayList<>();
-        adapter2 = new RenQiAdapter(getContext(), list2);
-        rec_ren.setAdapter(adapter2);
-        rec_ren.setLayoutManager(new LinearLayoutManager(getContext()));
-        rec_ren.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        adapter2 = new MoodsAdapter(getContext(), list2);
+        rec_moods.setAdapter(adapter2);
+        rec_moods.setLayoutManager(new LinearLayoutManager(getContext()));
+        rec_moods.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
        //专题精选适配器
         list3 = new ArrayList<>();
         adapter3 = new Page_TopicAdapter(getContext(), list3);
@@ -108,7 +100,7 @@ public class FristPageFragment extends BaseFragment<FristPage.View, FristPage.Pr
         list4 = new ArrayList<>();
         adapter4 = new HomeAdapter(getContext(), list4);
         rec_home.setAdapter(adapter4);
-
+        //给单独的RecyclerView设置禁止滑动
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2){
             @Override
             public boolean canScrollVertically() {
@@ -121,30 +113,29 @@ public class FristPageFragment extends BaseFragment<FristPage.View, FristPage.Pr
 
     @Override
     protected void initData() {
-        ((PagePresenter)persenter).getFristPage();
+        ((PagePresenter)presenter).getFirstPage();
 
     }
 
     @Override
-    protected FristPage.Presenter createPersenter() {
+    protected FirstPage.Presenter createPresenter() {
         return new PagePresenter();
-
     }
 
 
     @Override
-    public void returnFristPage(PageBean pageBean) {
-        tv_p.setText("品牌制造商直供");
+    public void returnFirstPage(PageBean pageBean) {
+        tv_brand.setText("品牌制造商直供");
         List<PageBean.DataBean.BrandListBean> brandList = pageBean.getData().getBrandList();
         list.addAll(brandList);
         adapter.notifyDataSetChanged();
 
-        tv_y.setText("周一周四.新品首发");
+        tv_new.setText("周一周四.新品首发");
         List<PageBean.DataBean.NewGoodsListBean> goodsList = pageBean.getData().getNewGoodsList();
         list1.addAll(goodsList);
         adapter1.notifyDataSetChanged();
 
-        tv_r.setText("人气推荐");
+        tv_moods.setText("人气推荐");
         List<PageBean.DataBean.HotGoodsListBean> hotGoodsList = pageBean.getData().getHotGoodsList();
         list2.addAll(hotGoodsList);
         adapter2.notifyDataSetChanged();
@@ -160,17 +151,17 @@ public class FristPageFragment extends BaseFragment<FristPage.View, FristPage.Pr
         list4.addAll(goodsList1);
         adapter4.notifyDataSetChanged();
 
-        List<PageBean.DataBean.BannerBean> banner = pageBean.getData().getBanner();
+        List<PageBean.DataBean.BannerBean> banners = pageBean.getData().getBanner();
         ArrayList<String> imgs = new ArrayList<>();
         List<PageBean.DataBean.ChannelBean> channel = pageBean.getData().getChannel();
         for (int i = 0; i < channel.size(); i++) {
-            tab_frist.addTab(tab_frist.newTab().setText(channel.get(i).getName()));
+            tab_first.addTab(tab_first.newTab().setText(channel.get(i).getName()));
         }
-        for (int i = 0; i < banner.size(); i++) {
-            String image_url = banner.get(i).getImage_url();
+        for (int i = 0; i < banners.size(); i++) {
+            String image_url = banners.get(i).getImage_url();
             imgs.add(image_url);
         }
-        bann.setImages(imgs).setImageLoader(new ImageLoader() {
+        banner.setImages(imgs).setImageLoader(new ImageLoader() {
             @Override
             public void displayImage(Context context, Object path, ImageView imageView) {
                 Glide.with(getActivity()).load((String) path).into(imageView);

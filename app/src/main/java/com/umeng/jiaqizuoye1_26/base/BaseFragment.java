@@ -11,14 +11,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.umeng.jiaqizuoye1_26.interfaces.IBaseView;
-import com.umeng.jiaqizuoye1_26.interfaces.IPersenter;
+import com.umeng.jiaqizuoye1_26.interfaces.IPresenter;
 import com.umeng.jiaqizuoye1_26.utils.SystemUtils;
 
 
-public abstract class BaseFragment<V extends IBaseView,P extends IPersenter> extends Fragment implements IBaseView {
+public abstract class BaseFragment<V extends IBaseView,P extends IPresenter> extends Fragment implements IBaseView {
 
     protected Context context;
-    protected P persenter;
+    protected P presenter;
 
 
     @Nullable
@@ -33,12 +33,14 @@ public abstract class BaseFragment<V extends IBaseView,P extends IPersenter> ext
             context = this.getContext();
 
             initView(view);
-            persenter = createPersenter();
-            persenter.attchView(this);
+            presenter = createPresenter();
+            presenter.attachView(this);
             initData();
         }
         return view;
     }
+
+
 
     //获取布局
     protected abstract int getLayout();
@@ -50,21 +52,20 @@ public abstract class BaseFragment<V extends IBaseView,P extends IPersenter> ext
     protected abstract void initData();
 
     //创建P
-    protected abstract P createPersenter();
-
+    protected abstract P createPresenter();
     @Override
     public void onResume() {
         super.onResume();
-        if(persenter != null){
-            persenter.attchView(this);
+        if(presenter != null){
+            presenter.attachView(this);
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(persenter != null){
-            persenter.detachView();
+        if(presenter != null){
+            presenter.detachView();
         }
 
     }

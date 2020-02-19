@@ -6,14 +6,14 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.umeng.jiaqizuoye1_26.interfaces.IBaseView;
-import com.umeng.jiaqizuoye1_26.interfaces.IPersenter;
+import com.umeng.jiaqizuoye1_26.interfaces.IPresenter;
 import com.umeng.jiaqizuoye1_26.utils.SystemUtils;
 
 
-public abstract class BaseActivity<V extends IBaseView,P extends IPersenter> extends AppCompatActivity implements IBaseView {
+public abstract class BaseActivity<V extends IBaseView,P extends IPresenter> extends AppCompatActivity implements IBaseView {
 
     protected Context context;
-    protected P persenter;
+    protected P presenter;
 
 
 
@@ -40,8 +40,8 @@ public abstract class BaseActivity<V extends IBaseView,P extends IPersenter> ext
         }else{
             context = this;
             initView();
-            persenter = createPersenter();
-            persenter.attchView(this);
+            presenter = createPersenter();
+            presenter.attachView(this);
             initData();
         }
     }
@@ -61,8 +61,8 @@ public abstract class BaseActivity<V extends IBaseView,P extends IPersenter> ext
     @Override
     protected void onResume() {
         super.onResume();
-        if(persenter != null){
-            persenter.attchView(this);
+        if(presenter != null){
+            presenter.attachView(this);
         }
     }
 
@@ -79,8 +79,8 @@ public abstract class BaseActivity<V extends IBaseView,P extends IPersenter> ext
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(persenter != null){
-            persenter.detachView();
+        if(presenter != null){
+            presenter.detachView();
         }
 
 

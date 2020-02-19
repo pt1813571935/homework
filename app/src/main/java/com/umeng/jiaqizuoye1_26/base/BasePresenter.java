@@ -2,7 +2,7 @@ package com.umeng.jiaqizuoye1_26.base;
 
 
 import com.umeng.jiaqizuoye1_26.interfaces.IBaseView;
-import com.umeng.jiaqizuoye1_26.interfaces.IPersenter;
+import com.umeng.jiaqizuoye1_26.interfaces.IPresenter;
 
 import java.lang.ref.WeakReference;
 
@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 
-public class BasePersenter<V extends IBaseView> implements IPersenter<V> {
+public class BasePresenter<V extends IBaseView> implements IPresenter<V> {
 
     protected V mView;
 
@@ -21,7 +21,7 @@ public class BasePersenter<V extends IBaseView> implements IPersenter<V> {
     protected CompositeDisposable compositeDisposable;
 
     @Override
-    public void attchView(V view) {
+    public void attachView(V view) {
         weakReference = new WeakReference<>(view);
         this.mView = weakReference.get();
     }
