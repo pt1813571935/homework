@@ -1,0 +1,23 @@
+package com.umeng.jiaqizuoye1_26.presenter.fristpagepresenter;
+
+import com.umeng.jiaqizuoye1_26.base.BasePresenter;
+import com.umeng.jiaqizuoye1_26.bean.PageBean;
+import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FirstPage;
+import com.umeng.jiaqizuoye1_26.interfaces.topic.Topic;
+import com.umeng.jiaqizuoye1_26.model.CommonSubscriber;
+import com.umeng.jiaqizuoye1_26.model.http.HttpManager;
+import com.umeng.jiaqizuoye1_26.utils.RxUtils;
+
+public class TopicPresenter extends BasePresenter<Topic.View> implements Topic.Presenter {
+    @Override
+    public void getTopic() {
+        addSubscribe(HttpManager.getMyApi().getPageBean()
+                .compose(RxUtils.<PageBean> rxScheduler())
+                .subscribeWith(new CommonSubscriber<PageBean>(mView){
+                    @Override
+                    public void onNext(PageBean pageBean) {
+                        mView.returnTopic(pageBean );
+                    }
+                }));
+    }
+}

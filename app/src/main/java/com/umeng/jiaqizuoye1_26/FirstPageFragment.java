@@ -33,7 +33,6 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
     private ArrayList<PageBean.DataBean.BannerBean> beans;
     private RecyclerView  rec_brand ;
     private RecyclerView rec_new;
-
     private TabLayout tab_first;
     private BrandAdapter adapter;
     private ArrayList<PageBean.DataBean.BrandListBean> list;

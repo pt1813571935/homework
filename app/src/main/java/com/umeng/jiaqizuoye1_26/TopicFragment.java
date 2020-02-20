@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.umeng.jiaqizuoye1_26.adapter.TopicAdapter;
+import com.umeng.jiaqizuoye1_26.base.BaseFragment;
 import com.umeng.jiaqizuoye1_26.bean.PageBean;
+import com.umeng.jiaqizuoye1_26.interfaces.topic.Topic;
+import com.umeng.jiaqizuoye1_26.presenter.fristpagepresenter.TopicPresenter;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,20 +29,34 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class TopicFragment extends Fragment {
+public class TopicFragment extends BaseFragment<Topic.View, Topic.Presenter>implements Topic.View {
 
     private RecyclerView rec;
     private List<PageBean.DataBean.TopicListBean> topicList;
-    @Nullable
+
+
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.topic_layout, null);
-        initView(view);
-        initData();
-        return view;
+    protected int getLayout() {
+        return R.layout.topic_layout;
     }
 
-    private void initData() {
+    protected void initData() {
+      ( (TopicPresenter)presenter).getTopic();
+
+    }
+
+    @Override
+    protected Topic.Presenter createPresenter() {
+        return new TopicPresenter();
+    }
+
+    protected void initView(View view) {
+        rec = view.findViewById(R.id.topic_rec);
+        rec.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void returnTopic(PageBean pageBean) {
         OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder()
                 .get()
@@ -69,11 +86,15 @@ public class TopicFragment extends Fragment {
                         });
                     }
                 });
+    }
+
+    @Override
+    public void showLoading() {
 
     }
 
-    private void initView(View view) {
-        rec = view.findViewById(R.id.topic_rec);
-        rec.setLayoutManager(new LinearLayoutManager(getContext()));
+    @Override
+    public void showError(String err) {
+
     }
 }
