@@ -1,8 +1,6 @@
 package com.umeng.jiaqizuoye1_26.adapter;
 
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,46 +9,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.umeng.jiaqizuoye1_26.R;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.bean.ClassityBean;
 
-import java.util.ArrayList;
 
-public class ClassifyAdapter extends RecyclerView.Adapter<ClassifyAdapter.Vh> {
-    private Context baseContext;
-    private ArrayList<ClassityBean> beans;
+import java.util.List;
 
-    public ClassifyAdapter(Context baseContext, ArrayList<ClassityBean> beans) {
-        this.baseContext = baseContext;
-        this.beans = beans;
+
+public class ClassifyAdapter extends BaseAdapter {
+
+
+    public ClassifyAdapter(List data, Context context) {
+        super(data, context);
     }
 
-    @NonNull
-    @Override
-    public Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(baseContext, R.layout.class_layout, null);
-        return new Vh(view);
-    }
 
     @Override
-    public void onBindViewHolder(@NonNull Vh holder, int position) {
-        Glide.with(baseContext).load(beans.get(position).image).into(holder.cl_img);
-        holder.cl_name.setText(beans.get(position).name);
+    public int getLayout() {
+        return R.layout.class_layout;
     }
 
     @Override
-    public int getItemCount() {
-        return beans.size();
+    public void bindData(BaseViewHolder holder, Object o) {
+        ClassityBean  list = (ClassityBean) o;
+        ImageView cl_img = (ImageView) holder.getView(R.id.cl_img);
+        TextView cl_name = (TextView) holder.getView(R.id.cl_name);
+        Glide.with(mContext).load(list.image).into(cl_img);
+        cl_name.setText(list.name);
     }
 
-    public class Vh extends RecyclerView.ViewHolder {
 
-        private  ImageView cl_img;
-        private  TextView cl_name;
-
-        public Vh(@NonNull View itemView) {
-            super(itemView);
-            cl_img = itemView.findViewById(R.id.cl_img);
-            cl_name = itemView.findViewById(R.id.cl_name);
-        }
-    }
 }

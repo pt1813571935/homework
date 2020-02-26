@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.10.0'                                //Glide:
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
     implementation('com.squareup.okhttp3:okhttp:4.2.2')                               //OkHttp:
-    implementation 'q.rorbin:VerticalTabLayout:1.2.5'                                       //垂直的tablayout
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    //垂直的tablayout
 
 }

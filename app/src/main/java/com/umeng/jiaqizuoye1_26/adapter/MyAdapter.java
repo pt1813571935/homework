@@ -1,8 +1,7 @@
 package com.umeng.jiaqizuoye1_26.adapter;
 
+
 import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,44 +10,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.umeng.jiaqizuoye1_26.R;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.bean.MeBean;
+import java.util.List;
 
-import java.util.ArrayList;
+public class MyAdapter extends BaseAdapter {
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.Vh> {
-    private ArrayList<MeBean> list;
-    private Context con;
 
-    public MyAdapter(ArrayList<MeBean> list, Context con) {
-        this.list = list;
-        this.con = con;
+    public MyAdapter(List data, Context context) {
+        super(data, context);
     }
 
-    @NonNull
+
     @Override
-    public Vh onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = View.inflate(con, R.layout.item_me, null);
-        return new Vh(view);
+    public int getLayout() {
+        return R.layout.item_me;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Vh holder, int position) {
-        holder.tv.setText(list.get(position).getText());
-        Glide.with(con).load(list.get(position).getImgpath()).into(holder.img);
+    public void bindData(BaseViewHolder holder, Object o) {
+        MeBean list= (MeBean) o;
+        ImageView img = (ImageView) holder.getView(R.id.iv_me_item);
+        TextView tv = (TextView) holder.getView(R.id.tv_me_item_text);
+        tv.setText(list.getText());
+        Glide.with(mContext).load(list.getImgpath()).into(img);
     }
 
-    @Override
-    public int getItemCount() {
-        return list.size();
-    }
-
-    public class Vh extends RecyclerView.ViewHolder {
-        ImageView img;
-        TextView tv;
-        public Vh(@NonNull View itemView) {
-            super(itemView);
-           img = itemView.findViewById(R.id.iv_me_item);
-           tv = itemView.findViewById(R.id.tv_me_item_text);
-        }
-    }
 }

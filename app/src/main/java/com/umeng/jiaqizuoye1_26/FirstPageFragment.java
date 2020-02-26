@@ -1,6 +1,7 @@
 package com.umeng.jiaqizuoye1_26;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -76,28 +77,28 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
         tv_home = view.findViewById(R.id.tv_home);
         //品牌制造商直供适配器
         list = new ArrayList<>();
-        adapter = new BrandAdapter(getContext(), list);
+        adapter = new BrandAdapter(list,getContext());
         rec_brand.setAdapter(adapter);
         rec_brand.setLayoutManager(new GridLayoutManager(getContext(), 2));
         //周一周四，新品首发适配器
         list1 = new ArrayList<>();
-        adapter1 = new NewAdapter(getContext(), list1);
+        adapter1 = new NewAdapter(list1,getContext());
         rec_new.setAdapter(adapter1);
         rec_new.setLayoutManager(new GridLayoutManager(getContext(), 2));
         //人气推荐适配器
         list2 = new ArrayList<>();
-        adapter2 = new MoodsAdapter(getContext(), list2);
+        adapter2 = new MoodsAdapter( list2,getContext());
         rec_moods.setAdapter(adapter2);
         rec_moods.setLayoutManager(new LinearLayoutManager(getContext()));
         rec_moods.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
        //专题精选适配器
         list3 = new ArrayList<>();
-        adapter3 = new Page_TopicAdapter(getContext(), list3);
+        adapter3 = new Page_TopicAdapter(list3,getContext());
         rec_topic.setAdapter(adapter3);
         rec_topic.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         //居家适配器
         list4 = new ArrayList<>();
-        adapter4 = new HomeAdapter(getContext(), list4);
+        adapter4 = new HomeAdapter(list4,getContext());
         rec_home.setAdapter(adapter4);
         //给单独的RecyclerView设置禁止滑动
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2){
@@ -112,7 +113,7 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
 
     @Override
     protected void initData() {
-        ((PagePresenter)presenter).getFirstPage();
+        presenter.getFirstPage();
 
     }
 
@@ -125,30 +126,32 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
     @Override
     public void returnFirstPage(PageBean pageBean) {
         tv_brand.setText("品牌制造商直供");
+        tv_brand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), BrandInfoActivity.class);
+                startActivity(intent);
+            }
+        });
         List<PageBean.DataBean.BrandListBean> brandList = pageBean.getData().getBrandList();
-        list.addAll(brandList);
-        adapter.notifyDataSetChanged();
+       adapter.updata(brandList);
 
         tv_new.setText("周一周四.新品首发");
         List<PageBean.DataBean.NewGoodsListBean> goodsList = pageBean.getData().getNewGoodsList();
-        list1.addAll(goodsList);
-        adapter1.notifyDataSetChanged();
+        adapter1.updata(goodsList);
 
         tv_moods.setText("人气推荐");
         List<PageBean.DataBean.HotGoodsListBean> hotGoodsList = pageBean.getData().getHotGoodsList();
-        list2.addAll(hotGoodsList);
-        adapter2.notifyDataSetChanged();
+        adapter2.updata(hotGoodsList);
 
         tv_topic.setText("专题精选");
         List<PageBean.DataBean.TopicListBean> topicList = pageBean.getData().getTopicList();
-        list3.addAll(topicList);
-        adapter3.notifyDataSetChanged();
+        adapter3.updata(topicList);
 
         tv_home.setText("居家");
         List<PageBean.DataBean.CategoryListBean> categoryList = pageBean.getData().getCategoryList();
         List<PageBean.DataBean.CategoryListBean.GoodsListBean> goodsList1 = categoryList.get(0).getGoodsList();
-        list4.addAll(goodsList1);
-        adapter4.notifyDataSetChanged();
+        adapter4.updata(goodsList1);
 
         List<PageBean.DataBean.BannerBean> banners = pageBean.getData().getBanner();
         ArrayList<String> imgs = new ArrayList<>();

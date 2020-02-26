@@ -2,7 +2,7 @@ package com.umeng.jiaqizuoye1_26.bean;
 
 import java.util.List;
 
-public class ListBean {
+public class ClassifyListBean {
 
     /**
      * errno : 0
