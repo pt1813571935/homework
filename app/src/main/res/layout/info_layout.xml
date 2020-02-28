@@ -5,11 +5,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         android:id="@+id/brandinfo_img"
-        android:layout_width="match_parent"
+        android:layout_width="360dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_height="200dp"/>
+        android:layout_height="210dp"/>
     <TextView
         android:id="@+id/brandinfo_desc"
         android:layout_width="wrap_content"

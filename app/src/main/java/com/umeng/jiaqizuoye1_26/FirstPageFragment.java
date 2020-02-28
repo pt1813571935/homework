@@ -18,17 +18,19 @@ import com.umeng.jiaqizuoye1_26.adapter.Page_TopicAdapter;
 import com.umeng.jiaqizuoye1_26.adapter.MoodsAdapter;
 import com.umeng.jiaqizuoye1_26.adapter.NewAdapter;
 import com.umeng.jiaqizuoye1_26.adapter.BrandAdapter;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseFragment;
 import com.umeng.jiaqizuoye1_26.bean.PageBean;
 import com.umeng.jiaqizuoye1_26.interfaces.fristpage.FirstPage;
 import com.umeng.jiaqizuoye1_26.presenter.fristpagepresenter.PagePresenter;
+import com.umeng.jiaqizuoye1_26.view.BrandDetailsActivity;
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Presenter> implements FirstPage.View {
+public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Presenter> implements FirstPage.View, BaseAdapter.ItemClickHandler {
 
 
     private ArrayList<PageBean.DataBean.BannerBean> beans;
@@ -54,6 +56,7 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
     private ArrayList<PageBean.DataBean.CategoryListBean.GoodsListBean> list4;
     private HomeAdapter adapter4;
     private Banner banner;
+    private List<PageBean.DataBean.BrandListBean> brandList;
 
 
     @Override
@@ -133,8 +136,9 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
                 startActivity(intent);
             }
         });
-        List<PageBean.DataBean.BrandListBean> brandList = pageBean.getData().getBrandList();
+        brandList = pageBean.getData().getBrandList();
        adapter.updata(brandList);
+       adapter.setOnItemClickHandler(this);
 
         tv_new.setText("周一周四.新品首发");
         List<PageBean.DataBean.NewGoodsListBean> goodsList = pageBean.getData().getNewGoodsList();
@@ -180,5 +184,10 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
     @Override
     public void showError(String err) {
 
+    }
+
+    @Override
+    public void itemClick(int position, BaseAdapter.BaseViewHolder holder) {
+      startActivity(new Intent(context, BrandDetailsActivity.class).putExtra("id",brandList.get(position).getId()));
     }
 }

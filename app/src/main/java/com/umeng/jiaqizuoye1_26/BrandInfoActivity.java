@@ -47,5 +47,6 @@ public class BrandInfoActivity extends BaseActivity<BrandInfo.View, BrandInfo.Pr
     @Override
     public void returnBrandInfo(BrandManufacturer brandManufacturer) {
        infoAdapter.updata(brandManufacturer.getData().getData());
+
     }
 }
