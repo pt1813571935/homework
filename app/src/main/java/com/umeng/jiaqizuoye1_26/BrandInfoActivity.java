@@ -1,5 +1,6 @@
 package com.umeng.jiaqizuoye1_26;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,17 +9,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.umeng.jiaqizuoye1_26.adapter.BrandInfoAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseActivity;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.bean.BrandManufacturer;
 import com.umeng.jiaqizuoye1_26.interfaces.brandinfo.BrandInfo;
 import com.umeng.jiaqizuoye1_26.presenter.BrandInfoPresenter;
+import com.umeng.jiaqizuoye1_26.view.BrandDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BrandInfoActivity extends BaseActivity<BrandInfo.View, BrandInfo.Presenter>implements BrandInfo.View {
+public class BrandInfoActivity extends BaseActivity<BrandInfo.View, BrandInfo.Presenter>implements BrandInfo.View,BaseAdapter.ItemClickHandler {
 
     private RecyclerView mBrandinfoRec;
     private BrandInfoAdapter infoAdapter;
+    private List<BrandManufacturer.DataBeanX.DataBean> data;
 
 
     @Override
@@ -28,10 +32,12 @@ public class BrandInfoActivity extends BaseActivity<BrandInfo.View, BrandInfo.Pr
 
     protected void initView() {
         mBrandinfoRec = (RecyclerView) findViewById(R.id.brandinfo_rec);
-        List<BrandManufacturer.DataBeanX.DataBean> data=new ArrayList<>();
+        data = new ArrayList<>();
         infoAdapter = new BrandInfoAdapter(data, context);
         mBrandinfoRec.setAdapter(infoAdapter);
         mBrandinfoRec.setLayoutManager(new LinearLayoutManager(context));
+
+        infoAdapter.setOnItemClickHandler( this);
     }
 
     @Override
@@ -47,6 +53,14 @@ public class BrandInfoActivity extends BaseActivity<BrandInfo.View, BrandInfo.Pr
     @Override
     public void returnBrandInfo(BrandManufacturer brandManufacturer) {
        infoAdapter.updata(brandManufacturer.getData().getData());
+
+    }
+
+    @Override
+    public void itemClick(int position, BaseAdapter.BaseViewHolder holder) {
+        Intent intent = new Intent(this, BrandDetailsActivity.class);
+        intent.putExtra("id",data.get(position).getId());
+        startActivity(intent);
 
     }
 }

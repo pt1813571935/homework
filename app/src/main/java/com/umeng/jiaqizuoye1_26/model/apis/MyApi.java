@@ -10,6 +10,9 @@ import com.umeng.jiaqizuoye1_26.bean.ClassifyListBean;
 import com.umeng.jiaqizuoye1_26.bean.ClassifyTabBean;
 import com.umeng.jiaqizuoye1_26.bean.ClassityBean;
 import com.umeng.jiaqizuoye1_26.bean.GoodsDescListBean;
+import com.umeng.jiaqizuoye1_26.bean.MoodsBean;
+import com.umeng.jiaqizuoye1_26.bean.MoodsBeanPhoto;
+import com.umeng.jiaqizuoye1_26.bean.NewBean;
 import com.umeng.jiaqizuoye1_26.bean.PageBean;
 
 import io.reactivex.Flowable;
@@ -38,4 +41,28 @@ public interface MyApi {
     Flowable<BrandDetailsBean>getBrandDetails(@Query("id")int id);
     @GET("goods/list")
     Flowable<GoodsDescListBean> getGoodsList(@Query("brandId") int id, @Query("page") int page, @Query("size") int size);
+
+    //新品列表
+    @GET("goods/list")
+    Flowable<NewBean>getNewBean(@Query("isNew") int ne,
+                                @Query("page") int page,
+                                @Query("size") int size,
+                                @Query("order") String order,
+                                @Query("sort") String sort,
+                                @Query("categoryId") int id);
+
+    //人气列表图片
+    @GET("goods/hot")
+    Flowable<MoodsBeanPhoto>getMoodsBeanPhoto();
+
+    //人气列表
+    @GET("goods/list")
+
+    Flowable<MoodsBean>getMoodsBean(@Query("isHot")int hot,
+                                    @Query("page") int page,
+                                    @Query("size") int size,
+                                    @Query("order") String order,
+                                    @Query("sort") String de,
+                                    @Query("categoryId") int id);
+
 }

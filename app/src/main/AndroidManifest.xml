@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.BrandDetailsActivity"></activity>
+        <activity android:name=".NewActivity"></activity>
+        <activity android:name=".MoodsActivity"></activity>
+        <activity android:name=".view.BrandDetailsActivity" />
         <activity android:name=".BrandInfoActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

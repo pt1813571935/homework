@@ -141,10 +141,24 @@ public class FirstPageFragment extends BaseFragment<FirstPage.View, FirstPage.Pr
        adapter.setOnItemClickHandler(this);
 
         tv_new.setText("周一周四.新品首发");
+        tv_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), NewActivity.class);
+                startActivity(intent);
+            }
+        });
         List<PageBean.DataBean.NewGoodsListBean> goodsList = pageBean.getData().getNewGoodsList();
         adapter1.updata(goodsList);
 
         tv_moods.setText("人气推荐");
+        tv_moods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MoodsActivity.class);
+                startActivity(intent);
+            }
+        });
         List<PageBean.DataBean.HotGoodsListBean> hotGoodsList = pageBean.getData().getHotGoodsList();
         adapter2.updata(hotGoodsList);
 
