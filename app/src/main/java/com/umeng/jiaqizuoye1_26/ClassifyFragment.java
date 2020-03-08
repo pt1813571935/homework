@@ -1,5 +1,6 @@
 package com.umeng.jiaqizuoye1_26;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.umeng.jiaqizuoye1_26.adapter.ClassifyAdapter;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseFragment;
 import com.umeng.jiaqizuoye1_26.bean.ClassifyListBean;
 import com.umeng.jiaqizuoye1_26.bean.ClassifyTabBean;
 import com.umeng.jiaqizuoye1_26.bean.ClassityBean;
 import com.umeng.jiaqizuoye1_26.interfaces.classify.ClassifyTab;
 import com.umeng.jiaqizuoye1_26.presenter.ClassifyTabPresenter;
+import com.umeng.jiaqizuoye1_26.view.SortDescActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,8 @@ import q.rorbin.verticaltablayout.adapter.TabAdapter;
 import q.rorbin.verticaltablayout.widget.ITabView;
 import q.rorbin.verticaltablayout.widget.TabView;
 
-public class ClassifyFragment extends BaseFragment<ClassifyTab.View,ClassifyTab.Presenter>implements ClassifyTab.View {
+public class ClassifyFragment extends BaseFragment<ClassifyTab.View,ClassifyTab.Presenter>implements ClassifyTab.View
+,BaseAdapter.ItemClickHandler{
     private VerticalTabLayout tabFenlei;
     private ConstraintLayout cl;
     private ImageView cImg;
@@ -120,6 +124,7 @@ public class ClassifyFragment extends BaseFragment<ClassifyTab.View,ClassifyTab.
                 beans.add(classityBean);
         }
             adapter = new ClassifyAdapter(beans,getContext());
+            adapter.setOnItemClickHandler(this);
             cl_rec.setAdapter(adapter);
             tabFenlei.addOnTabSelectedListener(new VerticalTabLayout.OnTabSelectedListener() {
                 @Override
@@ -163,5 +168,13 @@ public class ClassifyFragment extends BaseFragment<ClassifyTab.View,ClassifyTab.
     @Override
     public void showError(String err) {
 
+    }
+
+    @Override
+    public void itemClick(int position, BaseAdapter.BaseViewHolder holder) {
+        Intent intent = new Intent(context,SortDescActivity.class);
+        intent.putExtra("data",beans);
+        intent.putExtra("posi",position);
+        activity.startActivity(intent);
     }
 }

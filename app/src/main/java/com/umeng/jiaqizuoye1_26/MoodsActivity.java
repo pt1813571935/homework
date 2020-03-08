@@ -1,6 +1,7 @@
 package com.umeng.jiaqizuoye1_26;
 
 
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,15 +13,18 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.tabs.TabLayout;
 import com.umeng.jiaqizuoye1_26.adapter.MoodsInfoAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseActivity;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.bean.MoodsBean;
 import com.umeng.jiaqizuoye1_26.bean.MoodsBeanPhoto;
 import com.umeng.jiaqizuoye1_26.interfaces.Moods.MoodsInfo;
 import com.umeng.jiaqizuoye1_26.presenter.MoodsPresenter;
+import com.umeng.jiaqizuoye1_26.view.GoodsShoppingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MoodsActivity extends BaseActivity<MoodsInfo.View, MoodsInfo.Presenter> implements MoodsInfo.View,TabLayout.BaseOnTabSelectedListener {
+public class MoodsActivity extends BaseActivity<MoodsInfo.View, MoodsInfo.Presenter> implements MoodsInfo.View,TabLayout.BaseOnTabSelectedListener
+,BaseAdapter.ItemClickHandler {
 
     private ImageView mMoodImg;
     /**
@@ -61,6 +65,7 @@ public class MoodsActivity extends BaseActivity<MoodsInfo.View, MoodsInfo.Presen
         dataBeans = new ArrayList<>();
         moodsInfoAdapter = new MoodsInfoAdapter(dataBeans, context);
         mMoodRec.setAdapter(moodsInfoAdapter);
+        moodsInfoAdapter.setOnItemClickHandler(this);
     }
 
     @Override
@@ -128,5 +133,10 @@ public class MoodsActivity extends BaseActivity<MoodsInfo.View, MoodsInfo.Presen
                 order="asc";
             }
         }
+    }
+
+    @Override
+    public void itemClick(int position, BaseAdapter.BaseViewHolder holder) {
+        startActivity(new Intent(this, GoodsShoppingActivity.class).putExtra("id",dataBeans.get(position).getId()));
     }
 }

@@ -42,4 +42,13 @@ dependencies {
     implementation 'q.rorbin:VerticalTabLayout:1.2.5'
     //垂直的tablayout
 
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    android {
+        //指定jdk版本
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+    }
 }

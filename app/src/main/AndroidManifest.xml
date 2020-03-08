@@ -16,6 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".NewActivity"></activity>
+        <activity android:name=".view.GoodsShoppingActivity"/>
+        <activity android:name=".view.LoginActivity"/>
+        <activity android:name=".view.SortDescActivity"></activity>
+        <activity android:name=".view.RegisterActivity"/>
+
         <activity android:name=".MoodsActivity"></activity>
         <activity android:name=".view.BrandDetailsActivity" />
         <activity android:name=".BrandInfoActivity" />

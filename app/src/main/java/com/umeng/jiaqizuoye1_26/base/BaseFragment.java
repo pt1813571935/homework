@@ -1,5 +1,7 @@
 package com.umeng.jiaqizuoye1_26.base;
 
+import android.app.Activity;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +21,7 @@ public abstract class BaseFragment<V extends IBaseView,P extends IPresenter> ext
 
     protected Context context;
     protected P presenter;
+    protected Activity activity;
 
 
     @Nullable
@@ -31,7 +34,7 @@ public abstract class BaseFragment<V extends IBaseView,P extends IPresenter> ext
         }else{
             view = inflater.inflate(getLayout(),null);
             context = this.getContext();
-
+            activity = getActivity();
             initView(view);
             presenter = createPresenter();
             presenter.attachView(this);

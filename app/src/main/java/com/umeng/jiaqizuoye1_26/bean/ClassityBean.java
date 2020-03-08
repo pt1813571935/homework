@@ -1,7 +1,12 @@
 package com.umeng.jiaqizuoye1_26.bean;
 
-public class ClassityBean {
+import java.io.Serializable;
+
+
+public class ClassityBean implements Serializable {
    public String image;
    public String name;
+   public String desc;
+   public int id;
 
 }

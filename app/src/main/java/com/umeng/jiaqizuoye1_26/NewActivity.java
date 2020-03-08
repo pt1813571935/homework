@@ -1,5 +1,6 @@
 package com.umeng.jiaqizuoye1_26;
 
+import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.umeng.jiaqizuoye1_26.adapter.MoodsInfoAdapter;
 import com.umeng.jiaqizuoye1_26.adapter.NewInfoAdapter;
 import com.umeng.jiaqizuoye1_26.base.BaseActivity;
+import com.umeng.jiaqizuoye1_26.base.BaseAdapter;
 import com.umeng.jiaqizuoye1_26.bean.MoodsBean;
 import com.umeng.jiaqizuoye1_26.bean.MoodsBeanPhoto;
 import com.umeng.jiaqizuoye1_26.bean.NewBean;
@@ -18,11 +20,12 @@ import com.umeng.jiaqizuoye1_26.interfaces.Moods.MoodsInfo;
 import com.umeng.jiaqizuoye1_26.interfaces.infonew.NewInfo;
 import com.umeng.jiaqizuoye1_26.presenter.MoodsPresenter;
 import com.umeng.jiaqizuoye1_26.presenter.NewInfoPresenter;
+import com.umeng.jiaqizuoye1_26.view.GoodsShoppingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewActivity extends BaseActivity<NewInfo.View, NewInfo.Presenter> implements NewInfo.View,TabLayout.BaseOnTabSelectedListener {
+public class NewActivity extends BaseActivity<NewInfo.View, NewInfo.Presenter> implements NewInfo.View,TabLayout.BaseOnTabSelectedListener, BaseAdapter.ItemClickHandler {
 
     private ImageView new_img;
     /**
@@ -63,6 +66,7 @@ public class NewActivity extends BaseActivity<NewInfo.View, NewInfo.Presenter> i
         beans = new ArrayList<>();
         newInfoAdapter = new NewInfoAdapter(beans, context);
         new_rec.setAdapter(newInfoAdapter);
+        newInfoAdapter.setOnItemClickHandler(this);
     }
 
     @Override
@@ -131,5 +135,10 @@ public class NewActivity extends BaseActivity<NewInfo.View, NewInfo.Presenter> i
                 order="asc";
             }
         }
+    }
+
+    @Override
+    public void itemClick(int position, BaseAdapter.BaseViewHolder holder) {
+        startActivity(new Intent(this, GoodsShoppingActivity.class).putExtra("id",beans.get(position).getId()));
     }
 }
