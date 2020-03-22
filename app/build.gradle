@@ -44,6 +44,7 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'org.greenrobot:eventbus:3.1.1'
     android {
         //指定jdk版本
         compileOptions {
